@@ -15,7 +15,7 @@ module.exports = {
 
 
 async function registerUser(userParam) {
-    // validate
+    // validate ss
     if (await User.findOne({ username: userParam.username })) {
         throw 'Username "' + userParam.username + '" is already';
     }
