@@ -4,6 +4,7 @@ const connectionOptions = { useCreateIndex: true, useNewUrlParser: true, useUnif
 mongoose.connect(process.env.MONGODB_URI  ||  config.connectionString, connectionOptions);
 mongoose.Promise = global.Promise;
 
+
 module.exports = {
     User: require('../model/m_user')
 };  

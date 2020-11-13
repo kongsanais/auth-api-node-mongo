@@ -24,17 +24,18 @@ async function registerUser(userParam) {
 
     // hash password
     if (userParam.password) {
-        user.hash = bcrypt.hashSync(userParam.password, 10);
+        user.password = bcrypt.hashSync(userParam.password, 10);
     }
 
     // save user
     await user.save();
+    return user;
 }
 
 
 async function loginUser({ username, password }) {
     const user = await User.findOne({ username });
-    if (user && bcrypt.compareSync(password, user.hash)) {
+    if (user && bcrypt.compareSync(password, user.password)) {
         const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '1d' });
         return {
             ...user.toJSON(),
@@ -56,7 +57,7 @@ async function updateUser(id, userParam) {
 
     // hash password if it was entered
     if (userParam.password) {
-        userParam.hash = bcrypt.hashSync(userParam.password, 10);
+        userParam.password = bcrypt.hashSync(userParam.password,10);
     }
 
     // copy userParam properties to user
@@ -65,6 +66,8 @@ async function updateUser(id, userParam) {
     await user.save();
     return user;
 }
+
+
 
 async function deleteUser(id) {
     await User.findByIdAndRemove(id);

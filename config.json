@@ -1,4 +1,4 @@
 ﻿{
-    "connectionString": "mongodb://localhost/node-mongo-registration-login-api",
+    "connectionString": "mongodb://localhost/auth-api-node-mongo",
     "secret": "MYSECRETKEY2020"
 }
